@@ -1,5 +1,5 @@
 # Deep Vision Tech Hackathon
 ## Team Octave
 
-Welcome! Under Construction :)
+Welcome! Under Construction
 
