@@ -1,0 +1,160 @@
+version: "2.0"
+nlu:
+- intent: greet
+  examples: |
+    - hey
+    - hello
+    - hi
+    - hello there
+    - good morning
+    - good evening
+    - moin
+    - hey there
+    - let's go
+    - hey dude
+    - goodmorning
+    - goodevening
+    - good afternoon
+- intent: goodbye
+  examples: |
+    - good afternoon
+    - cu
+    - good by
+    - cee you later
+    - good night
+    - bye
+    - goodbye
+    - have a nice day
+    - see you around
+    - bye bye
+    - see you later
+- intent: affirm
+  examples: |
+    - yes
+    - y
+    - indeed
+    - of course
+    - that sounds good
+    - correct
+- intent: deny
+  examples: |
+    - no
+    - n
+    - never
+    - I don't think so
+    - don't like that
+    - no way
+    - not really
+- intent: what_can_do
+  examples: |
+    - what can you do?
+    - How can u assist me with?
+    - what's going on with you?
+    - what are you capable of?
+    - what are you upto?
+    - what are you working on?
+- intent: what_is_time
+  examples: |
+    - what's time now?
+    - can you say the time?
+    - current time?
+    - what is the time here?
+    - what is time in my place?
+- intent: what_is_date
+  examples: |
+    - what's the date?
+    - today's date?
+    - can you tell me the date?
+    - what's Today?
+    - what day it is?
+- intent: search_product
+  examples: |
+    - can u show me some [laptops](product_name)
+    - can u show me some [gaming chair](product_name)
+    - can u show me some [mobile phones](product_name)
+    - can u show me some [toys](product_name)
+    - can u show me some [dresses](product_name)
+    - I need to buy [mobile phones](product_name)
+    - I need to buy [dresses](product_name)
+    - I need to buy [toys](product_name)
+    - I need to buy [laptops](product_name)
+    - I need to buy [gaming chair](product_name)
+    - Show some products of [gaming chair](product_name)
+    - Show some products of [laptops](product_name)
+    - Show some products of [toys](product_name)
+    - Show some products of [dresses](product_name)
+    - Show some products of [mobile phones](product_name)
+    - Top Rated [toys](product_name)
+    - Top Rated [laptops](product_name)
+    - Top Rated [mobile phones](product_name)
+    - Top Rated [gaming chair](product_name)
+    - Top Rated [dresses](product_name)
+    - i need [mouse pad](product_name)
+    - i need to buy [laptops](product_name)
+    - i need [laptops](product_name)
+    - i need [laptops](product_name)
+- intent: todays_deal
+  examples: |
+    - Show me today's Deals
+    - Show me today offers
+    - Daily Deals
+    - can u show me today deals?
+    - what are special today?
+- intent: by_options
+  examples: |
+    - show me some filters
+    - show me some brands
+    - i need to filter it
+    - i need to see brands
+    - list the filters of the products
+    - list the brands of the products
+    - show me filters
+    - shoe me filters
+- intent: out_of_scope
+  examples: |
+    - that's not what I want to do
+    - wait stop
+    - you're no help
+    - this is no help at all
+    - how old are you
+    - I want to order a pizza
+    - tell me the weather
+    - this isn't working
+    - I already told you that
+    - don't like that
+    - I don't want to tell you that
+    - none of your business
+    - that's not right
+    - stop asking
+    - nevermind
+    - I want to do something else
+    - I changed my mind
+- intent: inform
+  examples: |
+    - show [1](selected_option)
+    - [2nd option](selected_option)
+    - [4](selected_option)
+    - show [under ₹20,000](selected_option)
+    - [₹40,000 – ₹50,000](selected_option)
+    - [Over ₹50,000](selected_option)
+    - [option 1](selected_option)
+    - [1](selected_option)
+
+
+- intent: choose_product
+  examples: |
+    - tell me more about [product 1](selected_product)
+    - tell me more about [product 2](selected_product)
+    - tell me more about [product 3](selected_product)
+    - show me more about [product 1](selected_product)
+    - show me more about [product 2](selected_product)
+    - show me more about [product 3](selected_product)
+    - what are specifications of [product 1](selected_product)
+    - what are specifications of [product 2](selected_product)
+    - what are specifications of [product 3](selected_product)
+    - information of [product 1](selected_product)
+    - information of [product 2](selected_product)
+    - information of [product 3](selected_product)
+    - tell me more about features [product 1](selected_product)
+    - tell me more about features [product 2](selected_product)
+    - tell me more about features [product 3](selected_product)

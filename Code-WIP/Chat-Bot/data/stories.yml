@@ -1,0 +1,153 @@
+version: "2.0"
+
+stories:
+
+- story: happy path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: utter_what_can_do
+
+
+- story: sad path 2
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+
+- story: what_can_do path
+  steps:
+  - intent: what_can_do
+  - action: utter_what_can_do
+
+
+- story: what_is_time path
+  steps:
+  - intent: what_is_time
+  - action: action_what_is_time
+
+- story: what_is_date path
+  steps:
+  - intent: what_is_date
+  - action: action_what_is_date
+
+- story: search_for_products_path
+  steps: 
+  - intent: search_product
+  - action: utter_search_product
+
+- story: Daily Deals
+  steps: 
+  - intent: greet
+  - action: utter_greet
+  - action: utter_what_can_do
+  - intent: todays_deal
+  - action: action_todays_deal
+
+- story: interactive_story_1
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: utter_what_can_do
+  - intent: search_product
+
+
+- story: search_for_products_path_1
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: utter_what_can_do
+  - intent: search_product
+    entities:
+    - product_name: laptops
+  - slot_was_set:
+    - product_name: laptops
+  - action: action_search_product
+  - intent: by_options
+  - action: action_by_options
+
+- story: by_options_stop_story
+  steps:
+  - intent: by_options
+  - action: action_by_options
+  - action: action_filter
+  - action: option_form
+  - active_loop: option_form
+  - intent: out_of_scope
+  - action: utter_ask_continue
+  - intent: affirm
+  - active_loop: null
+  
+- story: interactive_story_1
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: utter_what_can_do
+  - intent: search_product
+    entities:
+    - product_name: laptops
+  - slot_was_set:
+    - product_name: laptops
+  - action: action_search_product
+  - intent: by_options
+  - action: action_by_options
+  - action: action_filter
+  - action: option_form
+  - active_loop: option_form
+  - slot_was_set:
+    - requested_slot: selected_option
+  - slot_was_set:
+    - selected_option: '1'
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_filterd
+  - slot_was_set:
+    - selected_option: null
+
+
+- story: interactive_story_1
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: utter_what_can_do
+  - intent: search_product
+    entities:
+    - product_name: laptops
+  - slot_was_set:
+    - product_name: laptops
+  - action: action_search_product
+  - intent: by_options
+  - action: action_by_options
+  - action: action_brands
+  - action: option_form
+  - active_loop: option_form
+  - slot_was_set:
+    - requested_slot: selected_option
+  - slot_was_set:
+    - selected_option: '1'
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_branded
+  - slot_was_set:
+    - selected_option: null
+
+
+
+- story: interactive_story_3
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: utter_what_can_do
+  - intent: search_product
+    entities:
+    - product_name: laptops
+  - slot_was_set:
+    - product_name: laptops
+  - action: action_search_product
+  - intent: choose_product
+    entities:
+    - selected_product: product 1
+  - slot_was_set:
+    - selected_product: product 1
+  - action: action_product_details

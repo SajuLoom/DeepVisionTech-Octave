@@ -1,0 +1,73 @@
+version: '2.0'
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+intents:
+- search_product
+- greet
+- by_options
+- inform
+- goodbye
+- affirm
+- deny
+- what_can_do
+- what_is_time
+- what_is_date
+- todays_deal
+- out_of_scope
+- choose_product
+entities:
+- product_name
+- selected_option
+- selected_product
+slots:
+  product_name:
+    type: text
+    influence_conversation: true
+  selected_option:
+    type: text
+    influence_conversation: true
+  selected_product:
+    type: text
+    influence_conversation: true
+responses:
+  utter_greet:
+  - text: Hey! This is BayMax. What's poppin'.
+  utter_goodbye:
+  - text: Bye
+  utter_what_can_do:
+  - text: I am ur Personal Shopping Assistant. I will help you with Best products
+  utter_search_product:
+  - text: You Searched for {product_name}
+  utter_ask_selected_option:
+  - text: Choose any one option from above listed results
+  utter_ask_continue:
+  - text: Sorry, I don't quite understand. Do you want to continue?
+  utter_submit:
+  - text: option {selected_option}
+actions:
+- action_brands
+- action_by_options
+- action_filter
+- action_search_product
+- action_todays_deal
+- action_what_is_date
+- action_what_is_time
+- utter_greet
+- utter_search_product
+- utter_submit
+- utter_what_can_do
+- action_filterd
+- action_branded
+- action_product_details
+forms:
+  product_name_form:
+    required_slots:
+      product_name:
+      - type: from_entity
+        entity: product_name
+  option_form:
+    required_slots:
+      selected_option:
+      - type: from_entity
+        entity: selected_option
