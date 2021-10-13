@@ -12,7 +12,7 @@ from typing import Any, Text, Dict, List, Union
 from rasa_sdk import Action, Tracker
 import rasa_sdk
 from rasa_sdk.executor import CollectingDispatcher
-from rasa_sdk.events import FollowupAction
+from rasa_sdk.events import FollowupAction, SlotSet
 from rasa_sdk.forms import FormAction
 from datetime import date, datetime
 from bs4 import BeautifulSoup
@@ -32,7 +32,7 @@ import requests
 #
 #         return []
 
-
+product_name = ''
 items_list = []
 
 filter_link = []
@@ -143,14 +143,28 @@ def get_details(url):
         fr[f]=r
     details['Features'] = fr
     reviews= details_tag.find('div',class_="a-section a-spacing-large reviews-content filterable-reviews-content celwidget").find('div',class_="a-section review-views celwidget").find('div',class_="a-section review aok-relative") if details_tag.find('div',class_="a-section a-spacing-large reviews-content filterable-reviews-content celwidget").find('div',class_="a-section review-views celwidget").find('div',class_="a-section review aok-relative") is not None else "No reviews yet."
+    reviews= details_tag.find('div',class_="a-section a-spacing-large reviews-content filterable-reviews-content celwidget").find('div',class_="a-section review-views celwidget").find_all('div',class_="a-section review aok-relative") if details_tag.find('div',class_="a-section a-spacing-large reviews-content filterable-reviews-content celwidget").find('div',class_="a-section review-views celwidget").find_all('div',class_="a-section review aok-relative") is not None else "No reviews yet."
     re={}
-    for review in reviews:
+    ref={}
+    for item in reviews:
+        revperso= item.find('span',class_="a-profile-name").string.strip()
+        ref=revperso
+
+    j=len(ref)
+    i=3
+    if j<3:
+        i=j
+
+
+    for review in reviews[:i]:
         revperson=review.find('span',class_="a-profile-name").string.strip()
-        rev=review.find('div',class_="a-expander-content reviewText review-text-content a-expander-partial-collapse-content").find('span').string.strip()
+        rev=review.find('div',class_="a-expander-collapsed-height a-row a-expander-container a-expander-partial-collapse-container").find('span').text.strip()
         re[revperson]=rev
+
     details['Review']=re
 
     details['img'] = doc.find('div', id = "imgTagWrapperId").find('img')['src']
+
     
     return details
 
@@ -211,7 +225,8 @@ class ActionDailyDeals(Action):
         doc = BeautifulSoup(page.text,"html.parser")
 
         items = doc.find_all('li', class_="zg-item-immersion")
-
+        global items_list
+        items_list = []
         best_seller = []
         i = 4
         for item in items[:i]:
@@ -226,6 +241,7 @@ class ActionDailyDeals(Action):
             current_item['Rating'] = item.find('div', class_="a-icon-row a-spacing-none").find('a',class_="a-link-normal")['title']
             current_item['Name'] = c.find('img')['alt']
             current_item['Price'] = item.find('span', class_="aok-inline-block zg-item").find('a',class_="a-link-normal a-text-normal").find('span',class_="p13n-sc-price").string
+            items_list.append(current_item)
             best_seller.append(current_item)
         
 
@@ -236,8 +252,9 @@ class ActionDailyDeals(Action):
             name = item['Name']
             rating = item['Rating']
             price = item['Price']
-            details = f'Product {index+1}:- \nProduct Name: {name}\n Rating: {rating}\n Price:{price}'
-            dispatcher.utter_message(text= details,image=item['Image'])
+            details = f'Product {index+1}:-Product Name: {name}\n Rating: {rating}\n Price:{price}'
+            dispatcher.utter_message(image=item['Image'])
+            dispatcher.utter_message(text= details)
 
         return []
 
@@ -251,6 +268,7 @@ class ActionSerchProduct(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        global product_name
         product_name = tracker.get_slot('product_name')
         global items_list
         items_list = get_product(product_name)
@@ -260,32 +278,10 @@ class ActionSerchProduct(Action):
             name = item['Product name']
             rating = item['rating']
             price = item['price']
-
-            details = f'Product {index+1}:- \nProduct Name: {name}\n Rating: {rating}\n Price:{price}'
-
-            dispatcher.utter_message(text=details, image=item['image'])
-        print(items_list)
-        return []
-
-
-class ActionByOption(Action):
-
-    def name(self) -> Text:
-        return "action_by_options"
-
-    def run(self, dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
-        encounter = tracker.latest_message['text']
-        if any(i in encounter for i in ['filters','filter']):
-            return [rasa_sdk.events.FollowupAction("action_filter")]
-        if any(i in encounter for i in ['brands','brand']):
-            return [rasa_sdk.events.FollowupAction("action_brands")]
-        else:
-            dispatcher.utter_message('Sorry! I cant understand what you are looking for')
-            return []
-        
+            details =f'Product {index+1}:    --->Product Name: {name}    --->Rating: {rating}   --->Price:{price}'
+            dispatcher.utter_message(image=item['image'])
+            dispatcher.utter_message(text=details)
+        return [SlotSet("product_name",None)]
 
 class ActionByFilter(Action):
 
@@ -295,8 +291,8 @@ class ActionByFilter(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
-        product = tracker.get_slot('product_name')
+        global product_name
+        product = product_name
         product = product.replace(" ","+")
 
         headers = {"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:66.0) Gecko/20100101 Firefox/66.0", "Accept-Encoding":"gzip, deflate", "Accept":"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8", "DNT":"1","Connection":"close"
@@ -320,7 +316,9 @@ class ActionByFilter(Action):
         
         filters = 'Filters Available:- \n'
         for index, fil in enumerate(fil_list):
-            filters += f'{index+1}.{fil["name"]} \n'
+            filters += f'''
+            \n\t{index+1}.{fil["name"]} 
+            '''
         dispatcher.utter_message(text=filters)
 
         return []
@@ -335,7 +333,8 @@ class ActionByBrands(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-        product = tracker.get_slot('product_name')
+        global product_name
+        product = product_name
         product = product.replace(" ","+")
 
         headers = {"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:66.0) Gecko/20100101 Firefox/66.0", "Accept-Encoding":"gzip, deflate", "Accept":"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8", "DNT":"1","Connection":"close"
@@ -344,7 +343,7 @@ class ActionByBrands(Action):
         page = requests.get(url,headers= headers)
         doc = BeautifulSoup(page.content,"html.parser")
 
-        
+        print(doc)
         brands =doc.find(id="brandsRefinements").find_all('a',class_="a-link-normal s-navigation-item")
 
         brands_list = []
@@ -353,14 +352,18 @@ class ActionByBrands(Action):
         for brand in brands[:5]:
             current_item = {}
             current_item['link'] ="https://www.amazon.in" + brand['href']
-            name = brand.find('a', class_="a-size-base a-color-base").string
+            name = brand.find(class_="a-size-base a-color-base").string
             current_item['name'] = name
             brands_link.append(current_item["link"])
             brands_list.append(current_item)
 
-        filters = 'Here some of the Brands:- \n'
+        if len(items_list) == 0:
+            dispatcher.utter_message(text="Nothing to show")
+        filters = 'Brands Available:- \n'
         for index, fil in enumerate(brands_list):
-            filters += f'{index+1}.{fil["name"]} \n'
+            filters += f'''
+            \n\t{index+1}.{fil["name"]} 
+            '''
         dispatcher.utter_message(text=filters)
 
         return []
@@ -374,8 +377,12 @@ class ActionSearchProductFilter(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        global filter_link
         url = ''
         option = tracker.get_slot('selected_option')
+        if len(filter_link) == 0:
+            dispatcher.utter_message(text="No products Searched for listing")
+            return [SlotSet('selected_option',None)]
         if '1' in option:
             url = filter_link[0]
         elif '2' in option:
@@ -388,23 +395,23 @@ class ActionSearchProductFilter(Action):
             url = filter_link[4]
         else:
             dispatcher.utter_message(text="Sorry! I can't understand what you trying to say.")
-            return []
+            return [SlotSet('selected_option',None)]
 
         global items_list
         items_list = get_product_1(url)
-
-        dispatcher.utter_message(text="Here are some results for you..")
-
+        if len(items_list) == 0:
+            dispatcher.utter_message(text="Nothing to show")
+            return [SlotSet('selected_option',None)]
         for index,item in enumerate(items_list):
             name = item['Product name']
             rating = item['rating']
             price = item['price']
 
             details = f'Product {index+1}:- \nProduct Name: {name}\n Rating: {rating}\n Price:{price}'
+            dispatcher.utter_message(image=item['image'])
+            dispatcher.utter_message(text=details)
 
-            dispatcher.utter_message(text=details, image=item['image'])
-
-        return []
+        return [SlotSet('selected_option',None)]
 
 
 class ActionSearchProductBrand(Action):
@@ -415,7 +422,11 @@ class ActionSearchProductBrand(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        global brands_link
         url = ''
+        if len(brands_link) == 0:
+            dispatcher.utter_message(text="No products Searched for listing")
+            return [SlotSet('selected_option',None)]
         option = tracker.get_slot('selected_option')
         if '1' in option:
             url = brands_link[0]
@@ -429,23 +440,25 @@ class ActionSearchProductBrand(Action):
             url = brands_link[4]
         else:
             dispatcher.utter_message(text="Sorry! I can't understand what you trying to say.")
-            return []
+            return [SlotSet('selected_option',None)]
 
         global items_list
         items_list = get_product_1(url)
 
-        dispatcher.utter_message(text="Here are some results for you..")
+        if len(items_list) == 0:
+            dispatcher.utter_message(text="Nothing to show")
+            return [SlotSet('selected_option',None)]
 
         for index,item in enumerate(items_list):
             name = item['Product name']
             rating = item['rating']
             price = item['price']
 
-            details = f'Product {index+1}:- \nProduct Name: {name}\n Rating: {rating}\n Price:{price}'
+            details = f'Product {index+1}:- \n\nProduct Name: {name}\n\nRating: {rating}\n\nPrice:{price}'
+            dispatcher.utter_message(image=item['image'])
+            dispatcher.utter_message(text=details)
 
-            dispatcher.utter_message(text=details, image=item['image'])
-
-        return []            
+        return [SlotSet('selected_option',None)]            
 
 class ActionProductDetail(Action):
 
@@ -487,8 +500,8 @@ class ActionProductDetail(Action):
         
         message += '\nReviews:- \n'
         for i in details['Review']:
-            message += i + ': ' + details['Review'][i]
-
+            message += i + ': ' + details['Review'][i]+'\n'
+        message += '\nLink: ' + url
         dispatcher.utter_message(text=message)
 
         return []
