@@ -17,7 +17,6 @@ nlu:
     - good afternoon
 - intent: goodbye
   examples: |
-    - good afternoon
     - cu
     - good by
     - cee you later
@@ -92,7 +91,11 @@ nlu:
     - i need [mouse pad](product_name)
     - i need to buy [laptops](product_name)
     - i need [laptops](product_name)
-    - i need [laptops](product_name)
+    - i want to buy [mouse](product_name)
+    - [laptops](product_name)
+    - [gaming chair](product_name)
+    - [mobile phones](product_name)
+    - [toys](product_name)
 - intent: todays_deal
   examples: |
     - Show me today's Deals
@@ -100,47 +103,153 @@ nlu:
     - Daily Deals
     - can u show me today deals?
     - what are special today?
-- intent: by_options
+    - show me today's Deals
+- intent: by_filter_options
   examples: |
     - show me some filters
-    - show me some brands
     - i need to filter it
-    - i need to see brands
     - list the filters of the products
-    - list the brands of the products
     - show me filters
-    - shoe me filters
+    - filters
+    - show filters
+- intent: by_brand_options
+  examples: |
+    - show me some brands
+    - i need to see brands
+    - list the brands of the products
+    - show me brands
+    - brands
 - intent: out_of_scope
   examples: |
-    - that's not what I want to do
-    - wait stop
-    - you're no help
-    - this is no help at all
-    - how old are you
-    - I want to order a pizza
-    - tell me the weather
-    - this isn't working
-    - I already told you that
-    - don't like that
-    - I don't want to tell you that
-    - none of your business
-    - that's not right
-    - stop asking
-    - nevermind
-    - I want to do something else
-    - I changed my mind
+    - i am asking you an out of scope question
+    - can i die
+    - can YouTube talk?
+    - can you call me back ?
+    - can you give me your datacenter's password
+    - can you give me your datacenter's password?
+    - can you please send me an uber
+    - do i have to accept?
+    - have we met before?
+    - i already told you! i'm a shitmunchei
+    - i am trying to build one, and did some research before, but I have not do hand-on work yet
+    - i wanna marry you
+    - i want book a hotel
+    - i want to die
+    - i want to use pipe
+    - i will check
+    - i'm a shitmuncher
+    - recharge
+    - the Try it out is not working
+    - try it out broken
+    - what's do YouTube do
+    - what's your backend system?
+    - Who are your customers
+    - Why don’t you answer?
+    - won't you ask me how I am?
+    - you'r blue.
+    - a tamed mouse will arrive at your doorstep in the next couple of days
+    - again?
+    - are the newsletter worth the subscription?
+    - are u facebook
+    - are u, facebook?
+    - are you single?
+    - are you dev?
+    - are you russian?
+    - are you sick
+    - are you vegan
+    - better than you
+    - book a ticket
+    - but I just told you that :(
+    - call me father
+    - can you cheer me up
+    - cannot see
+    - chgfhgh
+    - colder
+    - common, just try
+    - connect to alexa
+    - cr
+    - custom service
+    - did i break you
+    - do you believe in god?
+    - do you have a phone number?
+    - do you have your photo?
+    - do you know me
+    - do you know ras
+    - do you like football
+    - do you like movies
+    - do you sell vacuum robots?
+    - do you want to marry me?
+    - docs
+    - doctor
+    - everything
+    - genocide
+    - get me a club mate
+    - give me a girl friend
+    - go back
+    - google?
+    - great, I'd like to buy a house
+    - hang on let me find it
+    - help with my life
+    - hey little mama let em whisper in your ear
+    - how about NYC
+    - how are the kids
+    - how can i get them?
+    - how can i test this
+    - how come you say ok ?
+    - how do you learn
+    - how many lines of codes
+    - how much is 10 + 89 ?
+    - how much is 10 + 89
+    - how to get rasa studio
+    - how to go to newyork ?
+    - i can't deal with _your_ request
+    - i hope you will be better
+    - i immediately need help with implementing the coolest bot you can imagine
+    - i m looking for job
+    - i told you already
+    - i will tame a mouse for you
+    - is it a wasteland full of broken robot parts?
+    - is it allow to
+    - is rasa a studio?
+    - is rasa any good
+    - is that any of your business
+    - isn't the newsletter just spam?
+    - it's a pity
+    - license
+    - ljljl
+    - mascot means?
+    - more
+    - mountain
+    - oh my god, not again!
+    - ok one then
+    - on wiche nlp based system are you build?
+    - only that?
+    - personal or work?
+    - please play music
+    - really? you're so touchy?
+    - refresh
+    - region with no. of records
+    - search wikipedia
+    - shitmuncher
+    - show me a picture of a chicken
+    - silly bot
+    - sing me a song
+    - some thing else
+    - someone call the police i think the bot died
+    - sorry, i cannot rephrase
+    - umm
 - intent: inform
   examples: |
-    - show [1](selected_option)
-    - [2nd option](selected_option)
-    - [4](selected_option)
-    - show [under ₹20,000](selected_option)
-    - [₹40,000 – ₹50,000](selected_option)
-    - [Over ₹50,000](selected_option)
-    - [option 1](selected_option)
-    - [1](selected_option)
-
-
+    - [2]nd option(selected_option)
+    - [1]st option(selected_option)
+    - [3]rd option(selected_option)
+    - [4]th option(selected_option)
+    - [5]th option(selected_option)
+    - option [5](selected_option)
+    - option [4](selected_option)
+    - option [3](selected_option)
+    - option [2](selected_option)
+    - option [1](selected_option)
 - intent: choose_product
   examples: |
     - tell me more about [product 1](selected_product)
@@ -158,3 +267,122 @@ nlu:
     - tell me more about features [product 1](selected_product)
     - tell me more about features [product 2](selected_product)
     - tell me more about features [product 3](selected_product)
+    - [product 1](selected_product)
+    - [product 2](selected_product)
+    - [product 3](selected_product)
+- intent: choice_needHelp
+  examples: |
+    - i need more help
+    - need more help
+    - more help
+    - additional help
+    - further help
+    - i need more help please
+    - need more help please
+    - more help please
+    - additional help please
+    - further help please
+    - i need more help pls
+    - need more help pls
+    - more help pls
+    - additional help pls
+    - further help pls
+    - i want more help
+    - i want additional help
+    - i want further help
+    - i want some more help
+    - i want some additional help
+    - i want some further help
+    - i want more help please
+    - i want additional help please
+    - i want further help please
+    - i want more help pls
+    - i want additional help pls
+    - i want further help pls
+    - i need something else
+    - i need smtg else
+    - i want something else
+    - i want smtg else
+    - something else
+    - smtg else
+- intent: choice_noHelp
+  examples: |
+    - i don't need help anymore
+    - i don't need help
+    - i don't need further help
+    - i don't need anymore help
+    - i don't additional help
+    - no more help
+    - no additional help
+    - no further help
+    - no help anymore
+    - no further help needed
+    - no additional help needed
+    - no more help needed
+- intent: search
+  examples: |
+    - i need to search some products
+    - i want to search some items
+    - search query
+    - ask me what i want
+    - i want to make search request
+    - search request
+- intent: what_is_name
+  examples: |
+    - i am [Saju](user_name)
+    - my name is [Srinivas](user_name)
+    - my name is [John](user_name)
+    - my name is [peter](user_name)
+    - my name is [arul](user_name)
+    - my name is [sathish kumar](user_name)
+    - my name is [Sathwik](user_name)
+    - i am [Kesavan](user_name)
+    - i am [arul](user_name)
+    - i am [sathish](user_name)
+    - i am [Srinivas](user_name)
+    - i am [Tara](user_name)
+    - [bayMax](user_name)
+    - [Leila Fedde](user_name)
+    - [Perikles Bruno](user_name)
+    - [Gavin Tim](user_name)
+    - [Candide Brittney](user_name)
+    - [Winslow Tendaji](user_name)
+    - [Terri Phokas](user_name)
+    - [Raelynn Mechteld](user_name)
+    - [Leta Päivä](user_name)
+    - [Iris Orit](user_name)
+    - [Jens Ealdgyð](user_name)
+    - [Oz Zora](user_name)
+    - [Andreas Henricus](user_name)
+    - [Everard Chris](user_name)
+    - [Yevheniy Crius](user_name)
+    - i am [Sivaavanish](user_name)
+- intent: rate
+  examples: |
+    - [1](rate)
+    - [2](rate)
+    - [3](rate)
+    - [4](rate)
+    - [5](rate)
+    - [6](rate)
+    - [7](rate)
+    - [8](rate)
+    - [9](rate)
+    - [10](rate)
+    - i will give you [1](rate)
+    - i will give you [2](rate)
+    - i will give you [3](rate)
+    - i will give you [4](rate)
+    - i will give you [5](rate)
+    - i will give you [6](rate)
+    - i will give you [7](rate)
+    - i will give you [8](rate)
+    - i will give you [9](rate)
+    - i will give you [10](rate)
+- intent: okay
+  examples: |
+    - Okay
+    - ok
+    - Yeah, Sure
+    - Sure
+    - Done
