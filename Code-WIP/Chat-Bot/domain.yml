@@ -3,23 +3,32 @@ session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
 intents:
-- search_product
-- greet
-- by_options
-- inform
 - goodbye
-- affirm
 - deny
+- rate
+- affirm
+- what_is_name
+- greet
+- todays_deal
+- search_product
+- inform
+- choose_product
+- by_filter_options
+- by_brand_options
 - what_can_do
 - what_is_time
 - what_is_date
-- todays_deal
 - out_of_scope
-- choose_product
+- choice_noHelp
+- choice_needHelp
+- search
+- okay
 entities:
 - product_name
+- rate
 - selected_option
 - selected_product
+- user_name
 slots:
   product_name:
     type: text
@@ -30,11 +39,17 @@ slots:
   selected_product:
     type: text
     influence_conversation: true
+  user_name:
+    type: text
+    influence_conversation: true
+  rate:
+    type: text
+    influence_conversation: true
 responses:
   utter_greet:
   - text: Hey! This is BayMax. What's poppin'.
   utter_goodbye:
-  - text: Bye
+  - text: Thank You, See You Again, Yours botly BayMax❤
   utter_what_can_do:
   - text: I am ur Personal Shopping Assistant. I will help you with Best products
   utter_search_product:
@@ -45,29 +60,64 @@ responses:
   - text: Sorry, I don't quite understand. Do you want to continue?
   utter_submit:
   - text: option {selected_option}
+  utter_ask_product_name:
+  - text: What Product you wanna search for?
+  utter_out_of_scope:
+  - buttons:
+    - payload: /choice_needHelp
+      title: I need Help
+    - payload: /choice_noHelp
+      title: Nevermind
+    text: I am a robot. I cannot be offended.
+  utter_help:
+  - text: You can ask me to search for any products
+  utter_nohelp:
+  - text: Okay, Then I'm going back to sleep.zzzzzzzz.if u wanna search Any Products say "ask me what i want"
+  utter_ask_rate:
+  - text: On a scale of one to ten, how would you rate me?😣😒🙂😊😃
+  utter_ask_user_name:
+  - text: BayMax wants to know your name.
+  utter_okay:
+  - text: Okay....
+  utter_feedback:
+  - text: I would love to get feedback from you
 actions:
+- action_branded
 - action_brands
 - action_by_options
 - action_filter
+- action_filterd
+- action_product_details
 - action_search_product
 - action_todays_deal
 - action_what_is_date
 - action_what_is_time
+- utter_goodbye
 - utter_greet
 - utter_search_product
 - utter_submit
 - utter_what_can_do
-- action_filterd
-- action_branded
-- action_product_details
 forms:
   product_name_form:
     required_slots:
       product_name:
       - type: from_entity
         entity: product_name
-  option_form:
+  filter_option_form:
     required_slots:
       selected_option:
       - type: from_entity
         entity: selected_option
+  brand_option_form:
+    required_slots:
+      selected_option:
+      - type: from_entity
+        entity: selected_option
+  feedback_form:
+    required_slots:
+      user_name:
+      - type: from_entity
+        entity: user_name
+      rate:
+      - type: from_entity
+        entity: rate
