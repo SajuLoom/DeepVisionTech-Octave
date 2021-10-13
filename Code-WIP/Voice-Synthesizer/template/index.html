@@ -1,0 +1,52 @@
+<html lang="en">
+  <head>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <title>Octave Voice</title>
+    <!-- <link rel="stylesheet" href="index.css" /> -->
+  </head>
+  <body background-color: coral;>
+    <h1 class="text-light">Octave</h1>
+    
+    <form method="POST" id="todo-form">
+      <select
+        class="form-select bg-secondary text-light"
+        name="voices"
+        id="voices"
+      >
+        <option value="0" selected>Sathish</option>
+        <option value="1">Sathwik</option>
+        <option value="2">Srinivas</option>
+      </select>
+      <!-- </form> -->
+      <!-- <form method="POST" action="{{ url_for('hello_world') }}"> -->
+      <textarea
+        name="textarea"
+        id="textarea"
+        class="form-control bg-dark text-light mt-5"
+        cols="30"
+        rows="5"
+        placeholder="Type here..."
+      ></textarea>
+      <br />
+      
+      <div class="mb-5">
+        <button type="submit" id="start" class="btn btn-success mt-5 me-5">
+          Start
+        </button>
+      </div>
+      <audio controls>
+        <source src="{{output}}" type="audio/wav" />
+      </audio>
+    </form>
+  </body>
+  <!-- script tag goes here -->
+  <script type="text/javascript">
+    document.getElementById('start').onclick = function () {
+      document.getElementById('waitline').style.display = 'block';
+    };
+  </script>
+  <!-- <script src="./textToSpeech.js"></script> -->
+</html>
