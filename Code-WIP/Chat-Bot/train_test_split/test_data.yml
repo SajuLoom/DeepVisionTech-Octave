@@ -1,0 +1,112 @@
+version: "2.0"
+nlu:
+- intent: what_is_time
+  examples: |
+    - what is time in my place?
+- intent: what_is_date
+  examples: |
+    - can you tell me the date?
+- intent: by_brand_options
+  examples: |
+    - brands
+- intent: okay
+  examples: |
+    - Yeah, Sure
+- intent: affirm
+  examples: |
+    - y
+    - yes
+- intent: what_can_do
+  examples: |
+    - what are you upto?
+- intent: todays_deal
+  examples: |
+    - Daily Deals
+- intent: by_filter_options
+  examples: |
+    - list the filters of the products
+- intent: search
+  examples: |
+    - i need to search some products
+- intent: deny
+  examples: |
+    - not really
+    - no way
+- intent: goodbye
+  examples: |
+    - see you around
+    - bye
+- intent: inform
+  examples: |
+    - [1]st option(selected_option)
+    - option [1](selected_option)
+- intent: choice_noHelp
+  examples: |
+    - no more help
+    - i don't additional help
+- intent: greet
+  examples: |
+    - goodmorning
+    - moin
+    - hello there
+- intent: choose_product
+  examples: |
+    - [product 3](selected_product)
+    - tell me more about features [product 3](selected_product)
+    - show me more about [product 2](selected_product)
+- intent: rate
+  examples: |
+    - [5](rate)
+    - [2](rate)
+    - [9](rate)
+    - i will give you [1](rate)
+- intent: search_product
+  examples: |
+    - I need to buy [dresses](product_name)
+    - i need [laptops](product_name)
+    - [mobile phones](product_name)
+    - Top Rated [dresses](product_name)
+    - Show some products of [toys](product_name)
+    - I need to buy [laptops](product_name)
+- intent: what_is_name
+  examples: |
+    - [Andreas Henricus](user_name)
+    - [Perikles Bruno](user_name)
+    - [Leta Päivä](user_name)
+    - [Jens Ealdgyð](user_name)
+    - my name is [arul](user_name)
+    - [Gavin Tim](user_name)
+- intent: choice_needHelp
+  examples: |
+    - additional help pls
+    - smtg else
+    - further help pls
+    - i need something else
+    - i need more help please
+    - i want some more help
+- intent: out_of_scope
+  examples: |
+    - really? you're so touchy?
+    - can you give me your datacenter's password?
+    - do you sell vacuum robots?
+    - are the newsletter worth the subscription?
+    - Why don’t you answer?
+    - is rasa a studio?
+    - are u facebook
+    - how many lines of codes
+    - only that?
+    - i am trying to build one, and did some research before, but I have not do hand-on work yet
+    - do you have a phone number?
+    - is that any of your business
+    - custom service
+    - how come you say ok ?
+    - go back
+    - genocide
+    - do you have your photo?
+    - common, just try
+    - sorry, i cannot rephrase
+    - hang on let me find it
+    - connect to alexa
+    - it's a pity
+    - i will tame a mouse for you
+    - i already told you! i'm a shitmunchei

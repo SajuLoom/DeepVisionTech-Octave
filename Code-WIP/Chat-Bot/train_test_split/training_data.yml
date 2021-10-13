@@ -1,0 +1,318 @@
+version: "2.0"
+nlu:
+- intent: what_is_time
+  examples: |
+    - current time?
+    - what's time now?
+    - what is the time here?
+    - can you say the time?
+- intent: what_is_date
+  examples: |
+    - what day it is?
+    - what's the date?
+    - what's Today?
+    - today's date?
+- intent: by_brand_options
+  examples: |
+    - list the brands of the products
+    - show me some brands
+    - i need to see brands
+    - show me brands
+- intent: okay
+  examples: |
+    - Sure
+    - ok
+    - Okay
+    - Done
+- intent: affirm
+  examples: |
+    - indeed
+    - of course
+    - correct
+    - that sounds good
+- intent: what_can_do
+  examples: |
+    - what are you working on?
+    - How can u assist me with?
+    - what can you do?
+    - what's going on with you?
+    - what are you capable of?
+- intent: todays_deal
+  examples: |
+    - show me today's Deals
+    - what are special today?
+    - Show me today's Deals
+    - can u show me today deals?
+    - Show me today offers
+- intent: by_filter_options
+  examples: |
+    - show me some filters
+    - show filters
+    - show me filters
+    - i need to filter it
+    - filters
+- intent: search
+  examples: |
+    - i want to search some items
+    - i want to make search request
+    - ask me what i want
+    - search request
+    - search query
+- intent: deny
+  examples: |
+    - no
+    - I don't think so
+    - don't like that
+    - never
+    - n
+- intent: goodbye
+  examples: |
+    - see you later
+    - good by
+    - bye bye
+    - goodbye
+    - good night
+    - cee you later
+    - cu
+    - have a nice day
+- intent: inform
+  examples: |
+    - [4]th option(selected_option)
+    - option [4](selected_option)
+    - [2]nd option(selected_option)
+    - option [5](selected_option)
+    - option [3](selected_option)
+    - [5]th option(selected_option)
+    - option [2](selected_option)
+    - [3]rd option(selected_option)
+- intent: choice_noHelp
+  examples: |
+    - no further help needed
+    - i don't need further help
+    - no further help
+    - no more help needed
+    - no help anymore
+    - i don't need help
+    - no additional help needed
+    - i don't need help anymore
+    - no additional help
+    - i don't need anymore help
+- intent: greet
+  examples: |
+    - hey
+    - hello
+    - hey dude
+    - good morning
+    - hey there
+    - let's go
+    - hi
+    - goodevening
+    - good evening
+    - good afternoon
+- intent: choose_product
+  examples: |
+    - tell me more about [product 1](selected_product)
+    - what are specifications of [product 1](selected_product)
+    - [product 2](selected_product)
+    - tell me more about [product 2](selected_product)
+    - tell me more about features [product 1](selected_product)
+    - tell me more about [product 3](selected_product)
+    - show me more about [product 1](selected_product)
+    - what are specifications of [product 2](selected_product)
+    - information of [product 2](selected_product)
+    - information of [product 1](selected_product)
+    - show me more about [product 3](selected_product)
+    - tell me more about features [product 2](selected_product)
+    - [product 1](selected_product)
+    - information of [product 3](selected_product)
+    - what are specifications of [product 3](selected_product)
+- intent: rate
+  examples: |
+    - i will give you [9](rate)
+    - i will give you [8](rate)
+    - [1](rate)
+    - [4](rate)
+    - i will give you [5](rate)
+    - [8](rate)
+    - i will give you [10](rate)
+    - i will give you [2](rate)
+    - [10](rate)
+    - i will give you [4](rate)
+    - [7](rate)
+    - i will give you [3](rate)
+    - [3](rate)
+    - [6](rate)
+    - i will give you [7](rate)
+    - i will give you [6](rate)
+- intent: search_product
+  examples: |
+    - Top Rated [gaming chair](product_name)
+    - can u show me some [mobile phones](product_name)
+    - I need to buy [toys](product_name)
+    - I need to buy [gaming chair](product_name)
+    - Show some products of [dresses](product_name)
+    - can u show me some [laptops](product_name)
+    - Show some products of [laptops](product_name)
+    - [laptops](product_name)
+    - i need [mouse pad](product_name)
+    - i want to buy [mouse](product_name)
+    - [gaming chair](product_name)
+    - i need to buy [laptops](product_name)
+    - I need to buy [mobile phones](product_name)
+    - can u show me some [toys](product_name)
+    - can u show me some [dresses](product_name)
+    - Top Rated [laptops](product_name)
+    - can u show me some [gaming chair](product_name)
+    - Show some products of [gaming chair](product_name)
+    - Top Rated [mobile phones](product_name)
+    - [toys](product_name)
+    - Top Rated [toys](product_name)
+    - Show some products of [mobile phones](product_name)
+- intent: what_is_name
+  examples: |
+    - i am [sathish](user_name)
+    - [Oz Zora](user_name)
+    - my name is [Sathwik](user_name)
+    - [Winslow Tendaji](user_name)
+    - [bayMax](user_name)
+    - [Candide Brittney](user_name)
+    - [Yevheniy Crius](user_name)
+    - my name is [Srinivas](user_name)
+    - i am [arul](user_name)
+    - [Raelynn Mechteld](user_name)
+    - i am [Saju](user_name)
+    - i am [Srinivas](user_name)
+    - i am [Tara](user_name)
+    - i am [Sivaavanish](user_name)
+    - my name is [sathish kumar](user_name)
+    - [Terri Phokas](user_name)
+    - my name is [peter](user_name)
+    - [Everard Chris](user_name)
+    - my name is [John](user_name)
+    - [Leila Fedde](user_name)
+    - i am [Kesavan](user_name)
+    - [Iris Orit](user_name)
+- intent: choice_needHelp
+  examples: |
+    - i need more help
+    - i want some further help
+    - more help
+    - more help pls
+    - further help
+    - further help please
+    - i want further help
+    - need more help pls
+    - i want something else
+    - i want more help please
+    - need more help please
+    - i need more help pls
+    - i want additional help please
+    - i want more help
+    - i want additional help
+    - need more help
+    - something else
+    - i want some additional help
+    - i want additional help pls
+    - i want further help pls
+    - additional help
+    - i need smtg else
+    - i want more help pls
+    - i want further help please
+    - i want smtg else
+    - additional help please
+    - more help please
+- intent: out_of_scope
+  examples: |
+    - are you vegan
+    - ljljl
+    - i want to die
+    - better than you
+    - i wanna marry you
+    - how are the kids
+    - can you please send me an uber
+    - are you dev?
+    - cr
+    - call me father
+    - get me a club mate
+    - mountain
+    - do you like football
+    - is rasa any good
+    - shitmuncher
+    - i hope you will be better
+    - everything
+    - how about NYC
+    - do you know ras
+    - try it out broken
+    - are u, facebook?
+    - is it allow to
+    - i immediately need help with implementing the coolest bot you can imagine
+    - can you cheer me up
+    - i m looking for job
+    - more
+    - do you want to marry me?
+    - some thing else
+    - show me a picture of a chicken
+    - google?
+    - on wiche nlp based system are you build?
+    - do you believe in god?
+    - are you single?
+    - great, I'd like to buy a house
+    - docs
+    - i can't deal with _your_ request
+    - how to get rasa studio
+    - refresh
+    - a tamed mouse will arrive at your doorstep in the next couple of days
+    - have we met before?
+    - silly bot
+    - i will check
+    - recharge
+    - how can i get them?
+    - how to go to newyork ?
+    - doctor
+    - can you give me your datacenter's password
+    - hey little mama let em whisper in your ear
+    - umm
+    - what's your backend system?
+    - i am asking you an out of scope question
+    - book a ticket
+    - do i have to accept?
+    - i want to use pipe
+    - did i break you
+    - license
+    - isn't the newsletter just spam?
+    - search wikipedia
+    - region with no. of records
+    - cannot see
+    - are you sick
+    - i want book a hotel
+    - how do you learn
+    - do you know me
+    - ok one then
+    - can YouTube talk?
+    - how can i test this
+    - Who are your customers
+    - sing me a song
+    - i told you already
+    - how much is 10 + 89
+    - the Try it out is not working
+    - you'r blue.
+    - how much is 10 + 89 ?
+    - can i die
+    - oh my god, not again!
+    - again?
+    - give me a girl friend
+    - please play music
+    - do you like movies
+    - help with my life
+    - i'm a shitmuncher
+    - what's do YouTube do
+    - can you call me back ?
+    - is it a wasteland full of broken robot parts?
+    - personal or work?
+    - colder
+    - mascot means?
+    - chgfhgh
+    - but I just told you that :(
+    - someone call the police i think the bot died
+    - are you russian?
+    - won't you ask me how I am?
